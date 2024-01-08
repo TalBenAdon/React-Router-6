@@ -7,7 +7,6 @@ function AdminLayout() {
     <div className={styles.container}>
       <AdminNav />
       <main>
-        {/* Add - the ***** to add the admin pages here */}
         <Outlet />
       </main>
     </div>
