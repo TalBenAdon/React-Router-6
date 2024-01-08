@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './style.module.css';
+import { UserContext } from '../../context/UserProvider';
 
 function Login() {
    const [formInfo, setFormInfo] = useState({ firstName: '', password: '' })
    const navigate = useNavigate()
-
+   const { setUser } = useContext(UserContext)
+   console.log(formInfo);
    const handleLogin = (e) => {
       e.preventDefault()
       // TODO -
       // Add your authentication logic here
+      setUser(formInfo)
+      let savedUser = localStorage.user
       // save to local storage and context
       navigate('/')
    };
