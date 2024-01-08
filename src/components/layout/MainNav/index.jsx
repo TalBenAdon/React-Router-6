@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './style.module.css';
-import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import { UserContext } from '../../../context/UserProvider';
 
 function MainNav() {
 
-   // TODO - replace the Link to NavLink with a conditional className
+   const user = useContext(UserContext)[0]
 
    return (
       <header className={styles.header}>
@@ -19,21 +19,23 @@ function MainNav() {
                      Home
                   </NavLink>
                </li>
-               {/* TODO - show only to connected users */}
-               <li className={styles.navItem}>
+
+               {user ? <li className={styles.navItem}>
                   <NavLink to="/admin" className={({ isActive }) =>
                      isActive ? styles.active : ""
                   }>
                      Admin
                   </NavLink>
-               </li>
+               </li> : ''}
+
                <li className={styles.navItem}>
-                  {/* TODO - add conditional logout button instead if the user connected */}
-                  <NavLink to="/login" className={({ isActive }) =>
+
+                  {user ? <NavLink to="/logout" className={({ isActive }) => isActive ? styles.active : ''}>Logout</NavLink> : <NavLink to="/login" className={({ isActive }) =>
                      isActive ? styles.active : ""
                   }>
                      Login
-                  </NavLink>
+                  </NavLink>}
+
                </li>
             </ul>
          </nav>
